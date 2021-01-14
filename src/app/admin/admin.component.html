@@ -1,2 +1,8 @@
-admin
-<router-outlet></router-outlet>
+<div class="contain">
+  <p-menubar [model]="items" styleClass="p-menubar-style">
+    <ng-template pTemplate="start">
+      <h2>Turnos</h2>
+  </ng-template>
+  </p-menubar>
+  <router-outlet></router-outlet>
+</div>
