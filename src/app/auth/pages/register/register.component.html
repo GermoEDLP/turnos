@@ -1,1 +1,69 @@
-<p>register works!</p>
+<p-card
+  header="Simple Card"
+  [style]="{ width: '25rem', 'margin-bottom': '2em' }"
+>
+  <div class="p-fluid">
+    <form [formGroup]="registerForm">
+      <div class="p-field">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            name="email"
+            formControlName="email"
+            [ngClass]="{ 'ng-invalid ng-dirty': emailInvalid }"
+          />
+          <label for="float-input">Email</label>
+        </span>
+        <small *ngIf="emailInvalid" id="pass-error" class="p-error"
+          >Coloque un mail valido</small
+        >
+      </div>
+      <div class="p-field">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="pass"
+            pInputText
+            name="pass"
+            formControlName="pass"
+            [ngClass]="{ 'ng-invalid ng-dirty': passInvalid }"
+          />
+          <label for="float-input">Contraseña</label>
+        </span>
+        <small *ngIf="passInvalid" id="pass-error" class="p-error"
+          >Coloque una contraseña valida</small
+        >
+      </div>
+      <div class="p-field">
+        <!-- <p-message
+          *ngIf="error"
+          severity="error"
+          [text]="error"
+          styleClass="p-mr-2"
+        ></p-message> -->
+      </div>
+      <div class="p-field">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Iniciar Sesión"
+          class="p-button-raised"
+          (click)="check()"
+        ></button>
+      </div>
+      <div class="p-field">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Registrarse"
+          class="p-button-raised p-button-secondary"
+          (click)="singInPage()"
+        ></button>
+      </div>
+    </form>
+  </div>
+</p-card>
