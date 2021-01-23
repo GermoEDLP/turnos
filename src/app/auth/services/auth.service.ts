@@ -23,7 +23,7 @@ export class AuthService {
     })
   }
 
-  createNewUser(user: User, uid: string) {
+  private createNewUser(user: User, uid: string) {
     user.id = uid;
     user.created_at = new Date();
     user.updated_at = new Date();
@@ -33,5 +33,9 @@ export class AuthService {
 
   updateUser(userMod: User) {
     return this.db.collection('user').doc(userMod.id).update(userMod)
+  }
+
+  forgotPass(email:string){
+    return this.auth.sendPasswordResetEmail(email);
   }
 }

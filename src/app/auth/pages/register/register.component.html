@@ -1,56 +1,89 @@
 <p-card
-  header="Simple Card"
+  header="Registro"
   [style]="{ width: '25rem', 'margin-bottom': '2em' }"
 >
   <div class="p-fluid">
     <form [formGroup]="registerForm">
       <div class="p-field">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            pInputText
-            name="email"
-            formControlName="email"
-            [ngClass]="{ 'ng-invalid ng-dirty': emailInvalid }"
-          />
-          <label for="float-input">Email</label>
-        </span>
-        <small *ngIf="emailInvalid" id="pass-error" class="p-error"
-          >Coloque un mail valido</small
-        >
+        <input
+          type="text"
+          pInputText
+          name="name"
+          formControlName="name"
+          placeholder="Nombre"
+          [ngClass]="{ 'ng-invalid ng-dirty': nameInvalid }"
+        />
+        <small *ngIf="nameInvalid" class="p-error">Coloque un nombre de mas de 3 letras</small>
       </div>
       <div class="p-field">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="pass"
-            pInputText
-            name="pass"
-            formControlName="pass"
-            [ngClass]="{ 'ng-invalid ng-dirty': passInvalid }"
-          />
-          <label for="float-input">Contraseña</label>
-        </span>
-        <small *ngIf="passInvalid" id="pass-error" class="p-error"
-          >Coloque una contraseña valida</small
-        >
+        <input
+          type="text"
+          pInputText
+          name="surname"
+          formControlName="surname"
+          placeholder="Apellido"
+          [ngClass]="{ 'ng-invalid ng-dirty': surnameInvalid }"
+        />
+        <small *ngIf="surnameInvalid" class="p-error">Coloque un apellido de mas de 3 letras</small>
       </div>
       <div class="p-field">
-        <!-- <p-message
-          *ngIf="error"
-          severity="error"
-          [text]="error"
+        <input
+          type="date"
+          pInputText
+          name="born"
+          formControlName="born"
+          placeholder="Fecha de nacimiento"
+          [ngClass]="{ 'ng-invalid ng-dirty': bornInvalid }"
+        />
+        <small *ngIf="bornInvalid" class="p-error">Coloque una fecha valida</small>
+      </div>
+      <div class="p-field">
+        <input
+          type="email"
+          pInputText
+          name="email"
+          formControlName="email"
+          placeholder="Email"
+          [ngClass]="{ 'ng-invalid ng-dirty': emailInvalid }"
+        />
+        <small *ngIf="emailInvalid" class="p-error">COloque un mail valido</small>
+      </div>
+      <div class="p-field">
+        <input
+          type="password"
+          pInputText
+          name="pass"
+          formControlName="pass"
+          placeholder="Contraseña"
+          [ngClass]="{ 'ng-invalid ng-dirty': passInvalid }"
+        />
+        <small *ngIf="passInvalid" class="p-error">Coloque una contraseña de mas de 6 caracteres</small>
+      </div><div class="p-field">
+        <input
+          type="password"
+          pInputText
+          name="pass2"
+          formControlName="pass2"
+          placeholder="Repite contraseña"
+          [ngClass]="{ 'ng-invalid ng-dirty': pass2Invalid }"
+        />
+        <small *ngIf="pass2Invalid" class="p-error">Las contraseñas deben coicidir</small>
+      </div>
+      <div class="p-field">
+        <p-message
+          *ngIf="msg.state"
+          [severity]="msg.severity"
+          [text]="msg.text"
           styleClass="p-mr-2"
-        ></p-message> -->
+        ></p-message>
       </div>
       <div class="p-field">
         <button
           pButton
           pRipple
           type="button"
-          label="Iniciar Sesión"
-          class="p-button-raised"
+          label="Registrarse"
+          class="p-button-raised p-button-success"
           (click)="check()"
         ></button>
       </div>
@@ -59,8 +92,8 @@
           pButton
           pRipple
           type="button"
-          label="Registrarse"
-          class="p-button-raised p-button-secondary"
+          label="Volver al inicio"
+          class="p-button-raised p-button-secondary p-button-text"
           (click)="singInPage()"
         ></button>
       </div>

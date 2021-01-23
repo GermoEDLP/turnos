@@ -18,10 +18,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authSvc: AuthService,
     private fb: FormBuilder
-  ) {}
+  ) {
+
+    this.formsCreate();
+  }
 
   ngOnInit(): void {
-    this.formsCreate();
   }
 
   formsCreate() {
@@ -71,5 +73,10 @@ export class LoginComponent implements OnInit {
 
   singUpPage() {
     this.router.navigateByUrl('/auth/register');
+  }
+
+  forgotPage(){
+    this.router.navigate(['auth', 'forgot']);
+
   }
 }

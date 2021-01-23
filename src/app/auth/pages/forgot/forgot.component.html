@@ -1,1 +1,51 @@
-<p>forgot works!</p>
+<p-card
+  header="Recuperar contraseña"
+  [style]="{ width: '25rem', 'margin-bottom': '2em' }"
+>
+  <form [formGroup]="email">
+    <div class="p-fluid">
+      <div class="p-field">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            name="email"
+            placeholder="Email"
+            formControlName="email"
+            (keydown.enter)="check()"
+            [ngClass]="{ 'ng-invalid ng-dirty': emailInvalid }"
+          />
+        <small *ngIf="emailInvalid" class="p-error"
+          >Coloque un mail valido</small
+        >
+      </div>
+      <div class="p-field">
+        <p-message
+          severity="{{msg.severity}}"
+          *ngIf="msg.state"
+          text="{{msg.text}}"
+        ></p-message>
+      </div>
+      <div class="p-field">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Enviar solicitud"
+          class="p-button-raised p-button-success"
+          (click)="check()"
+        ></button>
+      </div>
+      <div class="p-field">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Volver al inicio"
+          class="p-button-raised p-button-secondary p-button-text"
+          (click)="singInPage()"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-card>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 //Modulos propios
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthComponentsModule } from './components/components.module'
 
 //Modulos externos
 import { CardModule } from 'primeng/card';
@@ -30,9 +31,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    FormsModule,
+    AuthComponentsModule,
     CardModule,
     InputTextModule,
-    FormsModule,
     ReactiveFormsModule,
     ButtonModule,
     MessageModule,
