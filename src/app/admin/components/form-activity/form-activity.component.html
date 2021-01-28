@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="actForm">
+        <div class="p-fluid">
+          <div class="p-field">
+            <label for="name">Nombre</label>
+            <input
+              id="name"
+              type="text"
+              aria-describedby="name-help"
+              pInputText
+              formControlName="name"
+              [ngClass]="{ 'ng-invalid ng-dirty': nameInvalid }"
+            />
+            <small *ngIf="nameInvalid" id="name-help" class="p-error"
+              >Coloque un nombre valido.</small
+            >
+          </div>
+          <div class="p-field">
+            <label for="desc">Descripción</label>
+            <input
+              id="desc"
+              type="text"
+              aria-describedby="desc-help"
+              pInputText
+              formControlName="desc"
+              [ngClass]="{ 'ng-invalid ng-dirty': descInvalid }"
+            />
+            <small *ngIf="descInvalid" id="name-help" class="p-error"
+              >Coloque una descripción.</small
+            >
+          </div>
+          <div class="p-field">
+            <label for="schedule_desc">Descripción de horarios</label>
+            <input
+              id="schedule_desc"
+              type="text"
+              aria-describedby="schedule_desc-help"
+              pInputText
+              formControlName="schedule_desc"
+              [ngClass]="{ 'ng-invalid ng-dirty': sched_descInvalid }"
+            />
+            <small
+              *ngIf="sched_descInvalid"
+              id="schedule_desc-help"
+              class="p-error"
+              >Coloque una descripción de horarios.</small
+            >
+          </div>
+        </div>
+        <div class="p-field">
+          <label for="status">Estado</label>
+          <br />
+          <p-inputSwitch formControlName="status"></p-inputSwitch>
+          <p>
+            <small
+              >El estado determinará si la actividad esta disponible o
+              no.</small
+            >
+          </p>
+        </div>
+        <div class="p-field">
+          <label for="category">Categoria</label><br />
+          <p-multiSelect styleClass="big-width" [options]="categories" formControlName="category" optionLabel="name"></p-multiSelect>
+
+        </div>
+        <div class="p-field">
+          <p-table [value]="schedule">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Dia</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-plus"
+                    class="p-button-rounded p-button-success"
+                    (click)="loadScheduleForm()"
+                  ></button>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-schedule let-index="rowIndex">
+              <tr>
+                <td>{{ days[schedule.day].name }}</td>
+                <td>{{ schedule.hour_start | hym }}</td>
+                <td>{{ schedule.hour_end | hym }}</td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-info"
+                    (click)="loadScheduleForm(schedule, index)"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-danger"
+                    (click)="deleteSchedule(index)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        </div>
+
+        <p-dialog header="Horarios" (onHide)="closeSchedForm()"  [(visible)]="create" [style]="{width: '50vw', heigth: '50vw'}">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <form [formGroup]="schedForm">
+                  <div class="p-fluid">
+                    <div class="p-field">
+                      <label for="category">Dia</label><br />
+                      <p-dropdown
+                        [options]="days"
+                        formControlName="day"
+                        optionLabel="name"
+                        optionValue="pos"
+                      ></p-dropdown>
+                    </div>
+                    <div class="p-field">
+                      <label for="category">Inicio</label><br />
+                      <p-calendar formControlName="hour_start" [showTime]="true" [timeOnly]="true"></p-calendar>
+                    </div>
+                    <div class="p-field">
+                      <label for="category">Fin</label><br />
+                      <p-calendar formControlName="hour_end" [showTime]="true" [timeOnly]="true"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="p-field" style="margin: 20px 0px 0px 5px;">
+                    <button pButton pRipple type="button" label="Cancelar" (click)="closeSchedForm()" class="p-button-secondary p-button-text"></button>
+                    <button pButton pRipple *ngIf="updatingSchedule == undefined" type="button" label="Aceptar" (click)="createSchedule()" class="p-button-success p-button-text"></button>
+                    <button pButton pRipple *ngIf="updatingSchedule != undefined" type="button" label="Actualizar" (click)="updateSchedule()" class="p-button-success p-button-text"></button>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+
+        <p-divider></p-divider>
+
+        <div class="p-field" style="margin: 20px 0px 0px 5px;">
+          <button pButton pRipple type="button" label="Cancelar" (click)="closeForm()" class="p-button-secondary p-button-text"></button>
+          <button pButton pRipple *ngIf="new" type="button" label="Aceptar" (click)="createActivity()" class="p-button-success p-button-text"></button>
+          <button pButton pRipple *ngIf="!new" type="button" label="Actualizar" (click)="updateActivity()" class="p-button-success p-button-text"></button>
+
+        </div>
+
+
+
+      </form>
+    </div>
+  </div>
+  <p-toast></p-toast>
+
+</div>

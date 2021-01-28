@@ -1,0 +1,35 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col">
+      <h3>Control de actividades</h3>
+      <p-orderList [value]="activities" (onSelectionChange)="selected($event)" [listStyle]="{'height':'auto'}" filterBy="name" filterPlaceholder="Filtro por nombre">
+        <ng-template let-act pTemplate="item">
+            <div class="product-item">
+                <div class="image-container">
+                        <img src="https://picsum.photos/200/200" class="product-image" />
+                </div>
+                <div class="product-list-detail">
+                    <h5 class="p-mb-2">{{act.name}}</h5>
+                    <i class="pi pi-tag product-category-icon"></i>
+                    <span class="product-category" *ngFor="let cat of act.category"> <p-chip class="mr-2" label="{{cat.name}}"></p-chip></span>
+                </div>
+                <div class="product-list-action">
+                    <h6 class="p-mb-2">Miembros activos: {{act.members}}</h6>
+                    <span *ngIf="act.status" class="product-badge status-active">Activa</span>
+                    <span *ngIf="!act.status" class="product-badge status-inactive">Inactiva</span>
+
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+    <p-dialog *ngIf="actSelected" header="Actividad" [(visible)]="display">
+      <modal-activity (msg)="showMessage($event)" (close)="closeForm($event)" [new]="new"  [activity]="actSelected"></modal-activity>
+  </p-dialog>
+    </div>
+  </div>
+  <div class="row text-center">
+      <button pButton pRipple (click)="newAct()" type="button" label="Nueva actividad" class="p-button-raised p-button-success newButton"></button>
+
+  </div>
+  <p-toast></p-toast>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "turnos-proyecto": {
+      "hosting": {
+        "Turnos": [
+          "turnos-proyecto"
+        ]
+      }
+    }
+  }
+}
