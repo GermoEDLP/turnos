@@ -12,6 +12,10 @@ export class AdminService {
     return this.db.collection('user').valueChanges();
   }
 
+  getOptions(){
+    return this.db.collection('options').valueChanges();
+  }
+
 
 
 
