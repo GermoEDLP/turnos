@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row mt-3">
+    <h3>Configuración de conceptos</h3>
+  </div>
+  <p-toast></p-toast>
+  <div class="row mt-3">
+    <div class="col">
+      <p-card header="Ejercicios">
+        <p-confirmDialog
+          header="Confirmation"
+          icon="pi pi-exclamation-triangle"
+        ></p-confirmDialog>
+        <p-table
+          #dt1
+          [value]="exercises"
+          [globalFilterFields]="['name', 'desc', 'class']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+              <button
+                pButton
+                label="Limpiar filtros"
+                class="p-button-outlined"
+                icon="pi pi-filter-slash"
+                (click)="clear(dt1)"
+              ></button>
+              <span class="p-input-icon-rigth p-ml-auto">
+                <input
+                  pInputText
+                  type="text"
+                  (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Buscar..."
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Clase</th>
+              <th>Dificultad</th>
+              <th>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-plus"
+                  class="p-button-rounded p-button-success"
+                  (click)="loadCreateExer()"
+                ></button>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-exer let-index="rowIndex">
+            <tr>
+              <td>{{ exer.name }}</td>
+              <td>{{ exer.desc }}</td>
+              <td>{{ exer.class }}</td>
+              <td>
+                <p-rating
+                  [ngModel]="exer.dif"
+                  readonly="true"
+                  stars="5"
+                  [cancel]="false"
+                ></p-rating>
+              </td>
+              <td>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-info"
+                  (click)="loadEditExer(exer, index)"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-times"
+                  class="p-button-rounded p-button-danger"
+                  (click)="deleteExer(index)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-dialog header="Title" [(visible)]="display"> Content </p-dialog>
+      </p-card>
+    </div>
+  </div>
+</div>
