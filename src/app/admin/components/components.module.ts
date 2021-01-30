@@ -17,15 +17,22 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
-import {MultiSelectModule} from 'primeng/multiselect';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RatingModule } from 'primeng/rating';
+
 
 //Componentes
 import { FormActivityComponent } from './form-activity/form-activity.component';
+import { FromExerciseComponent } from './from-exercise/from-exercise.component';
 
 //Otros
 import { HourAndMinutesPipePipe } from 'src/app/pipes/hour-and-minutes-pipe.pipe';
 
-const comp = [FormActivityComponent, HourAndMinutesPipePipe];
+const comp = [
+  FormActivityComponent,
+  HourAndMinutesPipePipe,
+  FromExerciseComponent,
+];
 
 @NgModule({
   declarations: comp,
@@ -43,7 +50,8 @@ const comp = [FormActivityComponent, HourAndMinutesPipePipe];
     DividerModule,
     MessagesModule,
     ToastModule,
-    MultiSelectModule
+    MultiSelectModule,
+    RatingModule,
   ],
   exports: comp,
 })

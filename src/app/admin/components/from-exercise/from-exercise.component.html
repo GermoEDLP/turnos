@@ -1,0 +1,69 @@
+<form [formGroup]="exerForm">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col">
+      <label for="name">Nombre</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+    </div>
+    <div class="p-field p-col">
+      <label for="desc">Descripción</label>
+      <input id="desc" type="text" pInputText formControlName="desc" />
+    </div>
+    <div class="p-field p-col-12">
+      <label for="url">URL del video explicativo</label>
+      <input id="url" type="text" pInputText formControlName="url" />
+    </div>
+    <div class="p-field p-col-12">
+      <label for="dif">Dificultad</label>
+      <p-rating id="dif" formControlName="dif"></p-rating>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="class">Clase</label><br />
+      <p-dropdown
+        inputId="class"
+        [options]="classesExercise"
+        formControlName="class"
+        placeholder="Selecciona una clase"
+        optionLabel="name"
+      ></p-dropdown>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="musc_g">Grupo muscular</label><br />
+      <p-dropdown
+        inputId="musc_g"
+        [options]="muscsGroup"
+        formControlName="musc_g"
+        placeholder="Selecciona un grupo muscular"
+        optionLabel="name"
+      ></p-dropdown>
+    </div>
+    <div class="p-d-flex" style="width: 100%;">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Cancelar"
+        (click)="closeForm()"
+        class="p-button-raised p-button-secondary p-button-text"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Aceptar"
+        (click)="check()"
+        *ngIf="nuevo"
+        class="p-button-raised p-button-success p-button-text"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Actualizar"
+        (click)="check()"
+        *ngIf="!nuevo "
+        class="p-button-raised p-button-success p-button-text"
+      ></button>
+      <p-toast></p-toast>
+    </div>
+  </div>
+</form>

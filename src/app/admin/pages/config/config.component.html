@@ -13,7 +13,7 @@
         <p-table
           #dt1
           [value]="exercises"
-          [globalFilterFields]="['name', 'desc', 'class']"
+          [globalFilterFields]="['name', 'desc', 'class.name', 'musc_g.name']"
         >
           <ng-template pTemplate="caption">
             <div class="p-d-flex">
@@ -39,6 +39,7 @@
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Clase</th>
+              <th>Grupo muscular</th>
               <th>Dificultad</th>
               <th>
                 <button
@@ -56,7 +57,8 @@
             <tr>
               <td>{{ exer.name }}</td>
               <td>{{ exer.desc }}</td>
-              <td>{{ exer.class }}</td>
+              <td>{{ exer.class.name }}</td>
+              <td>{{ exer.musc_g.name }}</td>
               <td>
                 <p-rating
                   [ngModel]="exer.dif"
@@ -72,7 +74,7 @@
                   type="button"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-info"
-                  (click)="loadEditExer(exer, index)"
+                  (click)="loadEditExer(exer)"
                 ></button>
                 <button
                   pButton
@@ -80,13 +82,25 @@
                   type="button"
                   icon="pi pi-times"
                   class="p-button-rounded p-button-danger"
-                  (click)="deleteExer(index)"
+                  (click)="deleteExer(exer)"
                 ></button>
               </td>
             </tr>
           </ng-template>
         </p-table>
-        <p-dialog header="Title" [(visible)]="display"> Content </p-dialog>
+        <p-dialog
+          header="Ejercicio"
+          [(visible)]="display"
+          *ngIf="exerSelected"
+          (onHide)="closeExerciseForm()"
+        >
+          <modal-exercise
+            (complete)="evaluateComplete($event)"
+            (close)="closeExerciseForm()"
+            [nuevo]="nuevo"
+            [exercise]="exerSelected"
+          ></modal-exercise>
+        </p-dialog>
       </p-card>
     </div>
   </div>
