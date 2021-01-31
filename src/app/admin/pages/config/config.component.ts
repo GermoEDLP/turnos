@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { Exercise } from 'src/app/interfaces/exercise.interface';
+import { ClassExercise, Exercise, MuscularGroup } from 'src/app/interfaces/exercise.interface';
+import { MessageSimple } from 'src/app/interfaces/misc.interaces';
+import { ClassesClass } from '../../classes/classes.class';
 import { ExerciseClass } from '../../classes/exercise.class';
+import { MuscsClass } from '../../classes/muscs.class';
+import { ClassService } from '../../services/class.service';
 import { ExerciseService } from '../../services/exercise.service';
+import { MuscularGroupService } from '../../services/muscular-group.service';
 
 @Component({
   selector: 'app-config',
@@ -13,6 +18,8 @@ import { ExerciseService } from '../../services/exercise.service';
 })
 export class ConfigComponent implements OnInit {
   exercises: Exercise[];
+  classes: ClassExercise[];
+  muscs: MuscularGroup[];
   display: boolean = false;
   nuevo: boolean = false;
   exerSelected: Exercise;
@@ -20,17 +27,36 @@ export class ConfigComponent implements OnInit {
   constructor(
     private exerSvc: ExerciseService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private classSvc: ClassService,
+    private muscSvc: MuscularGroupService
   ) {}
 
   ngOnInit(): void {
-    this.getExercises();
+    // this.getExercises();
+    this.getClasses();
+    this.getMusc();
+    // this.classes = [new ClassesClass('Musculación')];
+    // this.muscs = [new MuscsClass('Pecho'), new MuscsClass('Espalda')]
+    this.exercises = [];
   }
 
   getExercises() {
     this.exerSvc.getExercises().subscribe((exers: Exercise[]) => {
       this.exercises = exers;
     });
+  }
+
+  getClasses() {
+    this.classSvc.getClassExercise().subscribe((c: ClassExercise[])=>{
+      this.classes = c;
+    })
+  }
+
+  getMusc() {
+    this.muscSvc.getMuscularGroups().subscribe((m: MuscularGroup[])=>{
+      this.muscs = m;
+    })
   }
 
   clear(table: Table) {
@@ -82,7 +108,8 @@ export class ConfigComponent implements OnInit {
   }
 
   editExer(exer: Exercise) {
-    this.exerSvc.updateExercise(exer)
+    this.exerSvc
+      .updateExercise(exer)
       .then(() => {
         this.messageService.add({
           severity: 'success',
@@ -133,5 +160,9 @@ export class ConfigComponent implements OnInit {
     this.nuevo = false;
     this.exerSelected = undefined;
     this.display = false;
+  }
+
+  messageSystem(event: MessageSimple){
+    this.messageService.add(event);
   }
 }

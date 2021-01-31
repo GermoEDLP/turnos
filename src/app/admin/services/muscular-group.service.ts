@@ -18,12 +18,12 @@ export class MuscularGroupService {
   creteMuscularGroups(musc: MuscularGroup){
     musc.id = this.db.createId();
     musc.created_at = new Date();
-    return this.ref.doc(musc.id).set(musc);
+    return this.ref.doc(musc.id).set({...musc});
   }
 
   updateMuscularGroups(musc: MuscularGroup){
     musc.updated_at = new Date();
-    return this.ref.doc(musc.id).update(musc);
+    return this.ref.doc(musc.id).update({...musc});
   }
 
   deleteMuscularGroups(musc: MuscularGroup){

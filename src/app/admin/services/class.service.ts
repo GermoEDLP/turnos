@@ -15,14 +15,16 @@ export class ClassService {
   }
 
   creteClassExercise(c: ClassExercise) {
-    c.id = this.db.createId();
+    let id = this.db.createId();
+    c.id = id;
     c.created_at = new Date();
-    return this.ref.doc(c.id).set(c);
+    c.updated_at = new Date();
+    return this.ref.doc(c.id).set({...c});
   }
 
   updateClassExercise(c: ClassExercise) {
     c.updated_at = new Date();
-    return this.ref.doc(c.id).update(c);
+    return this.ref.doc(c.id).update({...c});
   }
 
   deleteClassExercise(c: ClassExercise) {

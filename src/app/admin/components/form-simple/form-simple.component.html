@@ -1,0 +1,44 @@
+<div [formGroup]="form">
+  <div class="p-grid">
+    <div class="p-col">
+      <input type="text" pInputText formControlName="name" placeholder="Nombre" [ngClass]="{'g-invalid ng-dirty': invalid}"/>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col">
+      <p-message severity="error" *ngIf="invalid" text="Completa el nombre" class="m1"></p-message>
+    </div>
+  </div>
+  <div class="p-grid mt-2">
+    <div class="p-col">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Cancelar"
+        class="p-button-raised p-button-secondary p-button-text"
+        (click)="closeFrom()"
+      ></button>
+    </div>
+    <div class="p-col">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Aceptar"
+        *ngIf="item.name == ''"
+        class="p-button-raised p-button-success p-button-text"
+        (click)="check()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Actualizar"
+        *ngIf="item.name !== ''"
+        class="p-button-raised p-button-success p-button-text"
+        (click)="check()"
+      ></button>
+    </div>
+  </div>
+</div>

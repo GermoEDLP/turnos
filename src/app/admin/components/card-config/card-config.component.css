@@ -1,0 +1,9 @@
+.p-button-rounded{
+  float: right;
+  margin-right: 3px;
+}
+
+.deleteButton{
+  background: red;
+  border-color: red;
+}

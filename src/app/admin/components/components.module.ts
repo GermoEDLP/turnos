@@ -16,14 +16,18 @@ import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RatingModule } from 'primeng/rating';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 
 //Componentes
 import { FormActivityComponent } from './form-activity/form-activity.component';
 import { FromExerciseComponent } from './from-exercise/from-exercise.component';
+import { FormSimpleComponent } from './form-simple/form-simple.component';
+import { CardConfigComponent } from './card-config/card-config.component';
 
 //Otros
 import { HourAndMinutesPipePipe } from 'src/app/pipes/hour-and-minutes-pipe.pipe';
@@ -32,6 +36,8 @@ const comp = [
   FormActivityComponent,
   HourAndMinutesPipePipe,
   FromExerciseComponent,
+  FormSimpleComponent,
+  CardConfigComponent
 ];
 
 @NgModule({
@@ -52,6 +58,8 @@ const comp = [
     ToastModule,
     MultiSelectModule,
     RatingModule,
+    ConfirmPopupModule,
+    MessageModule
   ],
   exports: comp,
 })

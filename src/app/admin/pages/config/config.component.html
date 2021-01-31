@@ -7,7 +7,7 @@
     <div class="col">
       <p-card header="Ejercicios">
         <p-confirmDialog
-          header="Confirmation"
+          header="Confirmacion"
           icon="pi pi-exclamation-triangle"
         ></p-confirmDialog>
         <p-table
@@ -102,6 +102,14 @@
           ></modal-exercise>
         </p-dialog>
       </p-card>
+      <div class="p-grid mt-3">
+        <p-card class="p-col" header="Clases">
+          <card-config [group]="classes" [type]="'class'" (msg)="messageSystem($event)"></card-config>
+        </p-card>
+        <p-card class="p-col" header="Gupos musculares">
+          <card-config [group]="muscs" [type]="'musc'" (msg)="messageSystem($event)"></card-config>
+        </p-card>
+      </div>
     </div>
   </div>
 </div>
