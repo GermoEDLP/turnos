@@ -159,7 +159,7 @@ export class CardConfigComponent implements OnInit {
     event.path[3].style.background = 'aliceblue';
     this.confirmationService.confirm({
       target: event.path[3],
-      message: 'Esta seguro de proceder con el borrado de este elemento?',
+      message: 'Esta seguro de proceder con el borrado de este elemento? : ',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Si',
       acceptButtonStyleClass: 'daleteButton',
