@@ -23,6 +23,8 @@ export class FromExerciseComponent implements OnInit {
   exerForm: FormGroup;
   classesExercise: ClassExercise[];
   muscsGroup: MuscularGroup[];
+  displayVideo: boolean = false;
+urlVideo: string;
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,15 @@ export class FromExerciseComponent implements OnInit {
 
   loadForm() {
     this.exerForm.setValue(this.exercise);
+  }
+
+  loadVideo(){
+    this.urlVideo = this.exerForm.value.url;
+    this.displayVideo = true;
+  }
+
+  closeVideo(){
+    this.urlVideo = undefined;
   }
 
   check() {

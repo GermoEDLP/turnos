@@ -12,6 +12,7 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ActivityComponent } from './pages/activity/activity.component';
 import { ConfigComponent } from './pages/config/config.component';
+import { BlocksComponent } from './pages/blocks/blocks.component';
 
 //Otros
 import { AdminRoutingModule } from './admin-routing.module';
@@ -26,7 +27,6 @@ import { ChipModule } from 'primeng/chip';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import {RatingModule} from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
@@ -37,6 +37,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     UsersComponent,
     ActivityComponent,
     ConfigComponent,
+    BlocksComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +53,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     CardModule,
     TableModule,
     InputTextModule,
-    RatingModule,
     ConfirmDialogModule,
 
   ],

@@ -1,0 +1,40 @@
+.p-button-rounded{
+  float: right;
+  margin-right: 3px;
+}
+
+.deleteButton{
+  background: red;
+  border-color: red;
+}
+
+dt, dd{
+  margin-top: 8px;
+}
+
+.product-badge {
+  border-radius: 2px;
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+.product-badge.status-active {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.product-badge.status-inactive {
+  background: #ffcdd2;
+  color: #c63737;
+}
+
+.pfield{
+  padding: 3px !important;
+}
+
+.plus{
+  float: left !important;
+}

@@ -1,3 +1,7 @@
+import { Exercise } from 'src/app/interfaces/exercise.interface';
+import { ClassesClass } from './classes.class';
+import { MuscsClass } from './muscs.class';
+
 export class ExerciseClass {
   public name: string;
   public id?: string;
@@ -19,7 +23,12 @@ export class ExerciseClass {
     created_at?: Date | any;
   };
 
-  constructor(isNew: boolean = false) {
+  constructor(
+    isNew: boolean = false,
+    isTest?: boolean,
+    name?: string,
+    desc?: string
+  ) {
     if (isNew) {
       (this.name = ''),
         (this.id = ''),
@@ -31,5 +40,18 @@ export class ExerciseClass {
       this.created_at = '';
       this.updated_at = '';
     }
+    if (isTest) {
+      this.createExercise(name, desc);
+    }
+  }
+
+  createExercise(name: string, desc: string): any {
+    this.name = name;
+    this.desc = desc;
+    this.class = new ClassesClass('Activación');
+    this.musc_g = new MuscsClass('pecho');
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.dif = 3;
   }
 }

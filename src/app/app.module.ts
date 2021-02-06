@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 //Otros
 import { AppRoutingModule } from './app-routing.module';
 import { firebaseConfig } from 'src/temps/temps';
-import { HourAndMinutesPipePipe } from './pipes/hour-and-minutes-pipe.pipe';
 
 @NgModule({
   declarations: [AppComponent],

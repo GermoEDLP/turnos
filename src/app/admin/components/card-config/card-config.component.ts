@@ -21,6 +21,7 @@ export class CardConfigComponent implements OnInit {
   @Input('type') type: 'class' | 'musc' | string;
   @Output() msg: EventEmitter<MessageSimple> = new EventEmitter();
   display: boolean = false;
+  displayVideo: boolean = false;
   title: string;
   operation: 'class' | 'musc' | string;
   itemSelected: ClassExercise | MuscularGroup;
@@ -42,7 +43,7 @@ export class CardConfigComponent implements OnInit {
   loadCreateItem() {
     switch (this.type) {
       case 'class':
-        this.title = 'Nueva clase';
+        this.title = 'Nuevo bloque';
         this.itemSelected = new ClassesClass('');
         break;
       case 'musc':
@@ -57,7 +58,7 @@ export class CardConfigComponent implements OnInit {
   loadEditItem(item: ClassExercise | MuscularGroup) {
     switch (this.type) {
       case 'class':
-        this.title = 'Actualizar clase';
+        this.title = 'Actualizar bloque';
         break;
       case 'musc':
         this.title = 'Actualizar Grupo muscular';
@@ -67,6 +68,7 @@ export class CardConfigComponent implements OnInit {
     this.display = true;
     this.operation = 'old';
   }
+
 
   check(event: ClassExercise | MuscularGroup) {
     switch (this.type) {
@@ -97,7 +99,7 @@ export class CardConfigComponent implements OnInit {
     this.classSvc
       .creteClassExercise(event)
       .then(() => {
-        this.thenMsg('Confirmado', 'Clase creada')
+        this.thenMsg('Confirmado', 'Tipo de bloque creado')
       })
       .catch((e) => {
         this.catchMsg(e);
@@ -119,7 +121,7 @@ export class CardConfigComponent implements OnInit {
     this.classSvc
       .updateClassExercise(event)
       .then(() => {
-        this.thenMsg('Confirmado', 'Clase actualizada')
+        this.thenMsg('Confirmado', 'Tipo de bloque actualizado')
       })
       .catch((e) => {
         this.catchMsg(e);
@@ -170,7 +172,7 @@ export class CardConfigComponent implements OnInit {
             this.classSvc
               .deleteClassExercise(item)
               .then(() => {
-                this.thenMsg('Confirmado', 'Clase borrada')
+                this.thenMsg('Confirmado', 'Tipo de bloque borrado')
               })
               .catch((e) => {
                 this.catchMsg(e)

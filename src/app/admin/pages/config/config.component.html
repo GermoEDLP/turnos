@@ -6,108 +6,22 @@
   <div class="row mt-3">
     <div class="col">
       <p-card header="Ejercicios">
-        <p-confirmDialog
-          header="Confirmacion"
-          icon="pi pi-exclamation-triangle"
-        ></p-confirmDialog>
-        <p-table
-          #dt1
-          [value]="exercises"
-          [globalFilterFields]="['name', 'desc', 'class.name', 'musc_g.name']"
-        >
-          <ng-template pTemplate="caption">
-            <div class="p-d-flex">
-              <button
-                pButton
-                label="Limpiar filtros"
-                class="p-button-outlined"
-                icon="pi pi-filter-slash"
-                (click)="clear(dt1)"
-              ></button>
-              <span class="p-input-icon-rigth p-ml-auto">
-                <input
-                  pInputText
-                  type="text"
-                  (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                  placeholder="Buscar..."
-                />
-              </span>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Clase</th>
-              <th>Grupo muscular</th>
-              <th>Dificultad</th>
-              <th>
-                <button
-                  pButton
-                  pRipple
-                  type="button"
-                  icon="pi pi-plus"
-                  class="p-button-rounded p-button-success"
-                  (click)="loadCreateExer()"
-                ></button>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-exer let-index="rowIndex">
-            <tr>
-              <td>{{ exer.name }}</td>
-              <td>{{ exer.desc }}</td>
-              <td>{{ exer.class.name }}</td>
-              <td>{{ exer.musc_g.name }}</td>
-              <td>
-                <p-rating
-                  [ngModel]="exer.dif"
-                  readonly="true"
-                  stars="5"
-                  [cancel]="false"
-                ></p-rating>
-              </td>
-              <td>
-                <button
-                  pButton
-                  pRipple
-                  type="button"
-                  icon="pi pi-pencil"
-                  class="p-button-rounded p-button-info"
-                  (click)="loadEditExer(exer)"
-                ></button>
-                <button
-                  pButton
-                  pRipple
-                  type="button"
-                  icon="pi pi-times"
-                  class="p-button-rounded p-button-danger"
-                  (click)="deleteExer(exer)"
-                ></button>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-        <p-dialog
-          header="Ejercicio"
-          [(visible)]="display"
-          *ngIf="exerSelected"
-          (onHide)="closeExerciseForm()"
-        >
-          <modal-exercise
-            (complete)="evaluateComplete($event)"
-            (close)="closeExerciseForm()"
-            [nuevo]="nuevo"
-            [exercise]="exerSelected"
-          ></modal-exercise>
-        </p-dialog>
+        <card-exercise [exercises]="exercises" (msg)="messageSystem($event)"></card-exercise>
       </p-card>
       <div class="p-grid mt-3">
-        <p-card class="p-col" header="Clases">
-          <card-config [group]="classes" [type]="'class'" (msg)="messageSystem($event)"></card-config>
+        <p-card class="p-col" header="Tipos de bloque">
+          <card-config
+            [group]="classes"
+            [type]="'class'"
+            (msg)="messageSystem($event)"
+          ></card-config>
         </p-card>
         <p-card class="p-col" header="Gupos musculares">
-          <card-config [group]="muscs" [type]="'musc'" (msg)="messageSystem($event)"></card-config>
+          <card-config
+            [group]="muscs"
+            [type]="'musc'"
+            (msg)="messageSystem($event)"
+          ></card-config>
         </p-card>
       </div>
     </div>

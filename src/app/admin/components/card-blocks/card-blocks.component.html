@@ -1,0 +1,144 @@
+<p-accordion>
+  <p-accordionTab *ngFor="let block of blocks" [header]="block.name">
+    <div class="row">
+      <dt class="col-sm-3">Nombre del bloque</dt>
+      <dd class="col-sm-3">{{ block.name }}</dd>
+      <dt class="col-sm-3">Nombre para el usuario</dt>
+      <dd class="col-sm-3">{{ block.nameDisplay }}</dd>
+      <dt class="col-sm-3">Tipo</dt>
+      <dd class="col-sm-3">{{ block.type.name }}</dd>
+      <dt class="col-sm-3">Estado</dt>
+      <dd class="col-sm-3" *ngIf="block.activated">
+        <span class="product-badge status-active">Activa</span>
+      </dd>
+      <dd class="col-sm-3" *ngIf="!block.activated">
+        <span class="product-badge status-inactive">Inactiva</span>
+      </dd>
+    </div>
+
+    <p-table #dt1 [value]="block.exercises">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Ejercicio</th>
+          <th>Grupo muscular</th>
+          <th class="text-center" colspan="3">Trabajo</th>
+          <th>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-plus"
+              class="p-button-rounded p-button-success"
+              (click)="loadCreateBlock()"
+            ></button>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-exer let-index="rowIndex">
+        <tr>
+          <td>{{ exer.exercise.name }}</td>
+          <td>{{ exer.exercise.musc_g.name }}</td>
+          <td colspan="3" class="text-center">
+            <div class="p-fluid p-formgrid p-grid" *ngFor="let work of exer.work_cicle; let i = index">
+              <div
+                class="p-field p-col-12 p-md-9"
+                style="padding: 3px !important"
+              >
+                {{ work.cicle }} x
+                {{ work.repetition }} - ({{
+                  work.weigth
+                }})
+              </div>
+              <div
+                class="p-field p-col-12 p-md-3"
+                style="padding: 3px !important"
+              >
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-times"
+                  class="p-button-rounded p-button-secondary plus"
+                  pTooltip="Eliminar ciclo"
+                  tooltipPosition="top"
+                  (click)="deleteCicle(i)"
+                ></button>
+              </div>
+            </div>
+            <div>
+              <form>
+                <div class="p-fluid p-formgrid p-grid">
+                  <div
+                    class="p-field p-col-12 p-md-3"
+                    style="padding: 3px !important"
+                  >
+                    <input type="text" pInputText placeholder="Ciclos" />
+                  </div>
+                  <div
+                    class="p-field p-col-12 p-md-3"
+                    style="padding: 3px !important"
+                  >
+                    <input type="text" pInputText placeholder="Repetciones" />
+                  </div>
+                  <div
+                    class="p-field p-col-12 p-md-3"
+                    style="padding: 3px !important"
+                  >
+                    <input type="text" pInputText placeholder="Peso" />
+                  </div>
+                  <div
+                    class="p-field p-col-12 p-md-3"
+                    style="padding: 3px !important"
+                  >
+                    <button
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-plus"
+                      class="p-button-rounded p-button-secondary plus"
+                      pTooltip="Agregar ciclos"
+                      tooltipPosition="top"
+                      (click)="addCicle()"
+                    ></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </td>
+
+          <td>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-danger"
+              (click)="deleteBlock(exer)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-info"
+              (click)="loadEditBlock(exer)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-dialog
+      header="Ejercicio"
+      [(visible)]="display"
+      *ngIf="blockSelected"
+      (onHide)="closeBlockForm()"
+    >
+      <modal-exercise
+        (complete)="evaluateComplete($event)"
+        (close)="closeBlockForm()"
+        [nuevo]="nuevo"
+        [exercise]="blockSelected"
+      ></modal-exercise>
+    </p-dialog>
+  </p-accordionTab>
+</p-accordion>

@@ -25,6 +25,10 @@ export class AdminComponent implements OnInit {
         label: 'Configuración',
         routerLink: ['/admin','config'],
       },
+      {
+        label: 'Bloques',
+        routerLink: ['/admin','blocks'],
+      },
     ];
   }
 }
