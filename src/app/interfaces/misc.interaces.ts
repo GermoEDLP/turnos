@@ -1,5 +1,5 @@
 export interface MessageSimple{
-  state: boolean,
+  state?: boolean,
   text?: string,
   severity?: string,
   icon?: string,

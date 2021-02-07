@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p-table
+        #dt2
+        [value]="exercises"
+        styleClass="p-datatable-sm"
+        [scrollable]="true"
+        scrollHeight="400px"
+        [globalFilterFields]="['name', 'class.name', 'musc_g.name', 'desc']"
+        selectionMode="single"
+        [(selection)]="exerSelected"
+        (onRowSelect)="onRowSelect($event)"
+        dataKey="code"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex">
+            <button
+              pButton
+              label="Limpiar filtro"
+              class="p-button-outlined"
+              icon="pi pi-filter-slash"
+              (click)="clear(dt2)"
+            ></button>
+            <span class="p-input-icon-left p-ml-auto">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                placeholder="Buscar..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">
+              Nombre <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="class.name">
+              Bloque <p-sortIcon field="class.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="musc_g.name">
+              G. Muscular <p-sortIcon field="musc_g.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="dif">
+              Dificultad <p-sortIcon field="dif"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-exer>
+          <tr [pSelectableRow]="exer">
+            <td>{{ exer.name }}</td>
+            <td>{{ exer.class.name }}</td>
+            <td>{{ exer.musc_g.name }}</td>
+            <td>{{ exer.dif }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

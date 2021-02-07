@@ -24,7 +24,7 @@ export class ExerciseClass {
   };
 
   constructor(
-    isNew: boolean = false,
+    isNew: boolean = true,
     isTest?: boolean,
     name?: string,
     desc?: string

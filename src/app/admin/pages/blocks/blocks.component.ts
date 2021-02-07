@@ -9,6 +9,15 @@ import { MessageService } from 'primeng/api';
 })
 export class BlocksComponent implements OnInit {
   constructor(private messageService: MessageService) {}
+  display: boolean = false;
 
   ngOnInit(): void {}
+
+  messageSystem(event){
+    this.messageService.add(event);
+  }
+
+  loadAddBlock(){
+    this.display = true;
+  }
 }

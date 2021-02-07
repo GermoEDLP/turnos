@@ -1,5 +1,8 @@
 <p-accordion>
-  <p-accordionTab *ngFor="let block of blocks" [header]="block.name">
+  <p-accordionTab
+    *ngFor="let block of blocks; let blockIndex = index"
+    [header]="block.name"
+  >
     <div class="row">
       <dt class="col-sm-3">Nombre del bloque</dt>
       <dd class="col-sm-3">{{ block.name }}</dd>
@@ -28,26 +31,28 @@
               pRipple
               type="button"
               icon="pi pi-plus"
+              pTooltip="Agregar ejercicio al bloque"
+              tooltipPosition="top"
               class="p-button-rounded p-button-success"
-              (click)="loadCreateBlock()"
+              (click)="loadAddExercise()"
             ></button>
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-exer let-index="rowIndex">
+      <ng-template pTemplate="body" let-exer let-exerIndex="rowIndex">
         <tr>
           <td>{{ exer.exercise.name }}</td>
           <td>{{ exer.exercise.musc_g.name }}</td>
           <td colspan="3" class="text-center">
-            <div class="p-fluid p-formgrid p-grid" *ngFor="let work of exer.work_cicle; let i = index">
+            <div
+              class="p-fluid p-formgrid p-grid"
+              *ngFor="let work of exer.work_cicle; let cicleIndex = index"
+            >
               <div
                 class="p-field p-col-12 p-md-9"
                 style="padding: 3px !important"
               >
-                {{ work.cicle }} x
-                {{ work.repetition }} - ({{
-                  work.weigth
-                }})
+                {{ work.cicle }} x {{ work.repetition }} - ({{ work.weigth }})
               </div>
               <div
                 class="p-field p-col-12 p-md-3"
@@ -61,30 +66,51 @@
                   class="p-button-rounded p-button-secondary plus"
                   pTooltip="Eliminar ciclo"
                   tooltipPosition="top"
-                  (click)="deleteCicle(i)"
+                  (click)="deleteCicle(blockIndex, exerIndex, cicleIndex)"
                 ></button>
               </div>
             </div>
             <div>
-              <form>
+              <form [formGroup]="form">
                 <div class="p-fluid p-formgrid p-grid">
                   <div
                     class="p-field p-col-12 p-md-3"
                     style="padding: 3px !important"
                   >
-                    <input type="text" pInputText placeholder="Ciclos" />
+                    <input
+                      (keyup.enter)="addCicle(blockIndex, exerIndex)"
+                      type="text"
+                      pInputText
+                      placeholder="Ciclos"
+                      formControlName="cicle"
+                    />
                   </div>
                   <div
                     class="p-field p-col-12 p-md-3"
                     style="padding: 3px !important"
                   >
-                    <input type="text" pInputText placeholder="Repetciones" />
+                    <input
+                      (keyup.enter)="addCicle(blockIndex, exerIndex)"
+                      type="text"
+                      pInputText
+                      placeholder="Repetciones"
+                      formControlName="repetition"
+                    />
                   </div>
                   <div
                     class="p-field p-col-12 p-md-3"
                     style="padding: 3px !important"
                   >
-                    <input type="text" pInputText placeholder="Peso" />
+                    <div class="p-inputgroup">
+                      <input
+                        (keyup.enter)="addCicle(blockIndex, exerIndex)"
+                        type="text"
+                        pInputText
+                        placeholder="Peso"
+                        formControlName="weigth"
+                      />
+                      <span class="p-inputgroup-addon">Kg</span>
+                    </div>
                   </div>
                   <div
                     class="p-field p-col-12 p-md-3"
@@ -98,7 +124,7 @@
                       class="p-button-rounded p-button-secondary plus"
                       pTooltip="Agregar ciclos"
                       tooltipPosition="top"
-                      (click)="addCicle()"
+                      (click)="addCicle(blockIndex, exerIndex)"
                     ></button>
                   </div>
                 </div>
@@ -107,38 +133,34 @@
           </td>
 
           <td>
+            <p-confirmPopup></p-confirmPopup>
+
             <button
               pButton
               pRipple
               type="button"
               icon="pi pi-times"
               class="p-button-rounded p-button-danger"
-              (click)="deleteBlock(exer)"
-            ></button>
-            <button
-              pButton
-              pRipple
-              type="button"
-              icon="pi pi-pencil"
-              class="p-button-rounded p-button-info"
-              (click)="loadEditBlock(exer)"
+              pTooltip="Quitar ejercicio"
+              tooltipPosition="top"
+              (click)="removeExercise($event, blockIndex, exerIndex)"
             ></button>
           </td>
         </tr>
       </ng-template>
     </p-table>
     <p-dialog
-      header="Ejercicio"
+      header="Seleccione un ejercicio"
       [(visible)]="display"
-      *ngIf="blockSelected"
-      (onHide)="closeBlockForm()"
+      *ngIf="exerSelected"
+      (onHide)="closeExerForm()"
     >
-      <modal-exercise
-        (complete)="evaluateComplete($event)"
-        (close)="closeBlockForm()"
+      <select-exercise
+        (complete)="evaluateComplete($event, blockIndex)"
+        (close)="closeExerForm()"
         [nuevo]="nuevo"
-        [exercise]="blockSelected"
-      ></modal-exercise>
+        [exercise]="exerSelected"
+      ></select-exercise>
     </p-dialog>
   </p-accordionTab>
 </p-accordion>

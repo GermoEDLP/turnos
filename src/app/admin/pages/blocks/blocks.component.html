@@ -1,12 +1,35 @@
 <div class="container">
   <div class="row mt-3">
-    <h3>Bloques de trabajo</h3>
+    <span>
+      <h3>Bloques de trabajo</h3>
+    </span>
   </div>
   <p-toast></p-toast>
   <div class="row mt-3">
     <div class="col">
-      <p-card header="Bloques">
-        <card-blocks></card-blocks>
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="p-card-body" style="padding-bottom: 0px !important">
+            <p class="p-card-title">
+              Bloques
+              <span style="float: right"
+                ><button
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Agregar bloque"
+                  class="p-button-raised p-button-success"
+                  icon="pi pi-plus"
+                  (click)="loadAddBlock()"
+                ></button>
+                <p-dialog header="Nuevo Bloque" [(visible)]="display">
+                  <form-block></form-block>>
+                </p-dialog>
+              </span>
+            </p>
+          </div>
+        </ng-template>
+        <card-blocks (msg)="messageSystem($event)"></card-blocks>
       </p-card>
     </div>
   </div>

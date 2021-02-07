@@ -34,6 +34,8 @@ import { CardConfigComponent } from './card-config/card-config.component';
 import { CardExerciseComponent } from './card-exercise/card-exercise.component';
 import { FormVideoComponent } from './form-video/form-video.component';
 import { CardBlocksComponent } from './card-blocks/card-blocks.component';
+import { SelectExerciseComponent } from './select-exercise/select-exercise.component';
+import { FormBlockComponent } from './form-block/form-block.component';
 
 //Otros
 import { HourAndMinutesPipePipe } from 'src/app/pipes/hour-and-minutes-pipe.pipe';
@@ -48,7 +50,9 @@ const comp = [
   CardConfigComponent,
   CardExerciseComponent,
   FormVideoComponent,
-  CardBlocksComponent
+  CardBlocksComponent,
+  SelectExerciseComponent,
+  FormBlockComponent
 ];
 
 @NgModule({
